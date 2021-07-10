@@ -1,0 +1,1 @@
+* When we annotate a column with @Transient, we tell the Spring Container that this field is not needed in  the DB
