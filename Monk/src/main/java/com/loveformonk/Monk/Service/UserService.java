@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 /*   If somewhere we are autowiring userService into some other layer (like controller layer), we need to mark this as a Spring Bean.
      @Component allows the @Autowired to find the appropriate bean
 
@@ -26,5 +28,17 @@ public class UserService {
 
     public List<User> getUsers(){
         return userRepository.findAll();
+    }
+
+    public void addUser(User user){
+        Optional<User> u = userRepository.findUserByEmail(user.getEmail());
+
+        if(!u.isEmpty()) {
+            System.out.println("User already exists.");
+        }
+        else{
+            userRepository.save(user);
+            System.out.println("USer = " + user + "\nsaved to repository");
+        }
     }
 }

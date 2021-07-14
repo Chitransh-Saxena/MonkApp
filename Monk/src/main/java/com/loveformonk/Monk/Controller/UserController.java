@@ -3,9 +3,8 @@ package com.loveformonk.Monk.Controller;
 import com.loveformonk.Monk.Service.UserService;
 import com.loveformonk.Monk.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +24,13 @@ public class UserController {
 
         return userService.getUsers();
     }
+
+    @PostMapping(value = "/putUsers")
+    public void putUsers(@RequestBody User user){               // We take the request body of the APIs JSON, and map it to the User object
+
+        userService.addUser(user);
+    }
+
+
+    // TODO - Implement the functionality to delete a user based on userID
 }
